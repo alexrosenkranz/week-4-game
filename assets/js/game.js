@@ -34,11 +34,7 @@ $(document).ready(function() {
 
   newGame();
 
-  function stopGame() {
-    $('.crystal').on('click', function(){
-        userScore = userScore;
-    });
-  };
+
 
   // Set click events for crystals
     // each one adds a value amount to user score
@@ -53,11 +49,13 @@ $(document).ready(function() {
       };
       
       if (userScore === goalScore) {
+        $('.crystal').off('click');
         wins++;
         $('.wins').text(wins);
       };
 
       if (userScore > goalScore) {
+        $('.crystal').off('click');
         losses++;
         $('.losses').text(losses);
       };
