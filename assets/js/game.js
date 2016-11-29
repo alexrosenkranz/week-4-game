@@ -40,8 +40,20 @@ $(document).ready(function() {
     // lose game if user score > goal score
 
   $('.crystal').on('click', function() {
-    userScore += $(this).val('data-value');
+    userScore += parseInt($(this).attr('data-value'));
+    console.log(userScore);
     $('.userScore').text(userScore);
   });
+
+  if (userScore === goalScore) {
+    wins++;
+    newGame();
+
+  };
+
+  if (userScore > goalScore) {
+    losses++;
+    newGame();
+  }
 
   });
