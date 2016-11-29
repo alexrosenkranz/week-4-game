@@ -15,7 +15,7 @@ $(document).ready(function() {
   function newGame() {
     
     // Pick number between 19 and 120 at random for goal score
-    goalScore = Math.floor(Math.random() * 120) + 19;
+    goalScore = Math.floor(Math.random() * 101) + 19;
 
     // Set user score to 0
     userScore = 0;
@@ -24,6 +24,7 @@ $(document).ready(function() {
       $('.crystal').each(function() {
         var value = Math.floor(Math.random() * 12) + 1;
           $(this).attr('data-value',value);
+          $(this).attr('title',value);
       });
       $('.goalScore').text(goalScore);
       $('.userScore').text(userScore);
@@ -44,11 +45,13 @@ $(document).ready(function() {
     // win game if user score = goal score
     // lose game if user score > goal score
 
-  if (userScore < goalScore) {
+  
     $('.crystal').on('click', function() {
+      if (userScore < goalScore){
       userScore += parseInt($(this).attr('data-value'));  
       $('.userScore').text(userScore);
-
+      };
+      
       if (userScore === goalScore) {
         wins++;
         $('.wins').text(wins);
@@ -59,7 +62,7 @@ $(document).ready(function() {
         $('.losses').text(losses);
       };
     });
-  }
+ 
 
 
 
