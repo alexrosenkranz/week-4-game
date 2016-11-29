@@ -21,39 +21,54 @@ $(document).ready(function() {
     userScore = 0;
 
     // Set each crystal to a new value at random between 1 and 12 with jQuery attr
-    
-      
       $('.crystal').each(function() {
         var value = Math.floor(Math.random() * 12) + 1;
           $(this).attr('data-value',value);
       });
-    
-      console.log(goalScore);
-      console.log(userScore);
+      $('.goalScore').text(goalScore);
+      $('.userScore').text(userScore);
+      $('.wins').text(wins);
+      $('.losses').text(losses);
   };
 
   newGame();
+
+  function stopGame() {
+    $('.crystal').on('click', function(){
+        userScore = userScore;
+    });
+  };
 
   // Set click events for crystals
     // each one adds a value amount to user score
     // win game if user score = goal score
     // lose game if user score > goal score
 
-  $('.crystal').on('click', function() {
-    userScore += parseInt($(this).attr('data-value'));
-    console.log(userScore);
-    $('.userScore').text(userScore);
-  });
+  if (userScore < goalScore) {
+    $('.crystal').on('click', function() {
+      userScore += parseInt($(this).attr('data-value'));  
+      $('.userScore').text(userScore);
 
-  if (userScore === goalScore) {
-    wins++;
-    newGame();
+      if (userScore === goalScore) {
+        wins++;
+        $('.wins').text(wins);
+      };
 
-  };
-
-  if (userScore > goalScore) {
-    losses++;
-    newGame();
+      if (userScore > goalScore) {
+        losses++;
+        $('.losses').text(losses);
+      };
+    });
   }
 
+
+
+
+
+  $('.newGame').on('click', function(){ 
+    newGame();
   });
+
+  
+
+});
